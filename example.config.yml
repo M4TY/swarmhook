@@ -8,4 +8,4 @@ webhooks:
       token: "abc"
       service_name: "service_b"
       latest: false
-      image: "teachify/presentations"
+      image: "org/example"
