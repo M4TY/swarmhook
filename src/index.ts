@@ -106,7 +106,7 @@ function exec(service: Service, version: string) {
 
 const loadConfig = (): Config => {
     try {
-        const file = fs.readFileSync('./example.config.yml', 'utf8')
+        const file = fs.readFileSync('./config.yml', 'utf8')
         return parse(file);
     } catch (e) {
         console.log(e);
