@@ -1,0 +1,11 @@
+webhooks:
+  services:
+    service_a:
+      token: "abc"
+      service_name: "service_a"
+      latest: true
+    service_b:
+      token: "abc"
+      service_name: "service_b"
+      latest: false
+      image: "teachify/presentations"
