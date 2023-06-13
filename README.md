@@ -1,2 +1,7 @@
-# swarmhook
-A simple service that offers webhooks for redeploying Docker Swarm services
+![Swarmhook logo](assets/swarmhook.png "Swarmhook logo")
+
+# Swarmhook
+
+## A simple service that allows redeploying Docker Swarm services through webhooks
+
+...
