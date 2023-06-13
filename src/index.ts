@@ -41,7 +41,7 @@ const main = () => {
     app.use(express.json());
 
     app.get("/", (req, res) => {
-        res.json(config);
+        res.status(200).send("");
     });
 
     app.post("/webhooks/:serviceName", (req, res) => {

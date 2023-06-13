@@ -171,4 +171,5 @@ In case you want all of them, you can use the value `ALL`.
 ### Future plans
 
 - [ ] Add more webhook types
-- [ ] Create an administration UI with logs, webhook management and more.
+- [ ] Create an administration UI with logs, webhook management and more
+- [ ] Support for JSON config file
