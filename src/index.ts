@@ -10,22 +10,29 @@ type Config = {
         services: {
             [key: string]: Service
         }
-    }
+    },
+    notifications: Record<"discord" | "console", DiscordNotification[]>
 }
 
-type Service = {
+export type DiscordNotification = {
+    url: string,
+    services: string[]
+}
+
+export type Service = {
     token: string,
     service_name: string,
     latest: boolean
     image?: string
-
 }
+
+export let config: Config;
 
 const main = () => {
     dotenv.config();
     const app = express();
     const port = process.env.PORT || 3000;
-    const config = loadConfig();
+    config = loadConfig();
 
     for (const service of Object.keys(config.webhooks.services)) {
         notify(service, NotificationType.success);
@@ -57,7 +64,6 @@ const main = () => {
         const service_name = service.service_name;
 
         if (service.latest) {
-            notify(`Deploying ${service_name} to latest version`, NotificationType.deploy);
             res.status(200).send("Deploying to latest version");
             exec(service, "latest");
         } else {
@@ -66,7 +72,6 @@ const main = () => {
                 res.status(400).send("Missing version tag for deployment. (If you want to deploy to latest, set latest to true in the config)");
                 return;
             }
-            notify(`Deploying ${service_name} to ${imageVersionTag}`, NotificationType.deploy);
             res.status(200).send(`Deploying to ${imageVersionTag}`);
             exec(service, imageVersionTag);
         }
@@ -85,16 +90,17 @@ function exec(service: Service, version: string) {
             return;
         }
 
+
         const service_name = service.service_name;
         if (version === "latest") {
             const command = `docker service update ${service_name} --with-registry-auth`
             child_process.exec(command, (error, stdout, stderr) => {
                 if (error) {
-                    notify(`Error deploying ${service_name} to latest version`, NotificationType.error);
+                    notify(`Error deploying ${service_name} to latest version`, NotificationType.error, service);
                     console.log(error);
                     return;
                 }
-                notify(`Successfully deployed ${service_name} to latest version`, NotificationType.success);
+                notify(`Successfully deployed ${service_name} to latest version`, NotificationType.deploy, service);
             });
         } else {
             const image = service.image + ":" + version;
@@ -102,10 +108,10 @@ function exec(service: Service, version: string) {
             child_process.exec(command,
                 (error, stdout, stderr) => {
                     if (error) {
-                        notify(`Failed to deploy ${service_name} to version ${version}`, NotificationType.error);
+                        notify(`Failed to deploy ${service_name} to version ${version}`, NotificationType.error, service);
                         return;
                     }
-                    notify(`Successfully deployed ${service_name} to version ${version}`, NotificationType.success);
+                    notify(`Successfully deployed ${service_name} to version ${version}`, NotificationType.success, service);
                 });
         }
 

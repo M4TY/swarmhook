@@ -1,8 +1,7 @@
 POST {{URL}}/webhooks/{{SERVICE_NAME}}
 Authorization: Bearer {{ACCESS_TOKEN}}
-
 Content-Type: application/json
 
 {
-  "versionTag": "v1.0.2"
+  "versionTag": "v1.0.1"
 }

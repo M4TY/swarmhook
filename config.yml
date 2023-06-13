@@ -9,3 +9,13 @@ webhooks:
       service_name: "service_b"
       latest: false
       image: "org/example"
+notifications:
+  discord:
+    -
+      url: <url>
+      services:
+        - ALL
+    -
+      url: <url>
+      services:
+        - service_a
