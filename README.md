@@ -1,4 +1,4 @@
-[![Docker Pulls](https://img.shields.io/docker/pulls/m4ty/swarmhook?maxAge=4800)](https://hub.docker.com/repository/docker/m4ty/swarmhook/general)
+[![Docker Pulls](https://img.shields.io/docker/pulls/m4ty/swarmhook?maxAge=4800)](https://hub.docker.com/r/m4ty/swarmhook)
 
 ![Swarmhook logo](assets/swarmhook.png "Swarmhook logo")
 
