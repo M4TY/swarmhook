@@ -90,7 +90,6 @@ function exec(service: Service, version: string) {
             return;
         }
 
-
         const service_name = service.service_name;
         if (version === "latest") {
             const command = `docker service update ${service_name} --with-registry-auth`
