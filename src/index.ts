@@ -109,6 +109,7 @@ function exec(service: Service, version: string) {
                 (error, stdout, stderr) => {
                     if (error) {
                         notify(`Failed to deploy ${service_name} to version ${version}`, NotificationType.error, service);
+                        console.log(error);
                         return;
                     }
                     notify(`Successfully deployed ${service_name} to version ${version}`, NotificationType.success, service);
