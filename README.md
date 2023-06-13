@@ -133,7 +133,7 @@ webhooks:
 
 #### Notifications
 
-> Disclaimer: The implementation of Notifications are still in an early stage and the config structures may change.
+> Disclaimer: The implementation of Notifications is still in an early stage and the config structures may change.
 
 Service webhooks can also trigger other webhooks, that can for example send notifications to a different range of
 services.
