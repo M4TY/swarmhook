@@ -1,4 +1,4 @@
-[![Docker Pulls](https://img.shields.io/docker/pulls/m4ty/swarmhook?maxAge=4800)](https://hub.docker.com/r/m4ty/swarmhooks/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/m4ty/swarmhook?maxAge=4800)](https://hub.docker.com/repository/docker/m4ty/swarmhook/general)
 
 ![Swarmhook logo](assets/swarmhook.png "Swarmhook logo")
 
@@ -175,3 +175,4 @@ In case you want all of them, you can use the value `ALL`.
 - [ ] Add more webhook types
 - [ ] Create an administration UI with logs, webhook management and more
 - [ ] Support for JSON config file
+- [ ] Refactor
