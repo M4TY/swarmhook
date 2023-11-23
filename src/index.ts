@@ -34,6 +34,8 @@ const main = () => {
     const port = process.env.PORT || 3000;
     config = loadConfig();
 
+    console.log(config);
+
     for (const service of Object.keys(config.webhooks.services)) {
         notify(service, NotificationType.success);
     }
