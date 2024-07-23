@@ -1,4 +1,5 @@
-import {config, DiscordNotification, Service} from "../index";
+import {config} from "../index";
+import {DiscordNotification, Service} from "../types";
 
 enum NotificationType {
     "deploy",
