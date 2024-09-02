@@ -47,6 +47,7 @@ const main = () => {
     });
 
     app.post("/webhooks/:serviceName", (req, res) => {
+        console.log("Received webhook request for " + req.params.serviceName)
         const serviceName = req.params.serviceName;
 
         if (!config.webhooks.services[serviceName]) {
@@ -116,6 +117,8 @@ function exec(service: Service, version: string) {
                     notify(`Successfully deployed ${service_name} to version ${version}`, NotificationType.success, service);
                 });
         }
+
+        console.log("Finished request " + service_name)
 
     });
 }
