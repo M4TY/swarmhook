@@ -96,8 +96,7 @@ The config.yml file has different types of configurations.
 #### Using latest version
 
 When a service uses latest as a default tag for deploying, you have the possibility to set it with the `latest: true`
-property. In case this property is set to true, you do not need to specify the image the services uses, as shown in
-service_a:
+property.
 
 ```yml
 webhooks:
@@ -106,6 +105,7 @@ webhooks:
       token: "abc"
       service_name: "service_a"
       latest: true
+      image: "org/example"
 ```
 
 #### Using specific version
@@ -124,6 +124,7 @@ webhooks:
       token: "abc"
       service_name: "service_a"
       latest: true
+      image: "org/example"
     service_b:
       token: "abc"
       service_name: "service_b"
@@ -152,6 +153,7 @@ webhooks:
       token: "abc"
       service_name: "service_a"
       latest: true
+      image: "org/example"
     service_b:
       token: "abc"
       service_name: "service_b"
