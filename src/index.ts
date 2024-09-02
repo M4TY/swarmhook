@@ -94,14 +94,14 @@ function exec(service: Service, version: string) {
 
         const service_name = service.service_name;
         if (version === "latest") {
-            const command = `docker service update ${service_name} --with-registry-auth`
+            const command = `docker service update --force ${service_name} --with-registry-auth`
             child_process.exec(command, (error, stdout, stderr) => {
                 if (error) {
                     notify(`Error deploying ${service_name} to latest version`, NotificationType.error, service);
                     console.log(error);
                     return;
                 }
-                notify(`Successfully deployed ${service_name} to latest version`, NotificationType.deploy, service);
+                notify(`Successfully deployed ${service_name} to latest version`, NotificationType.success, service);
             });
         } else {
             const image = service.image + ":" + version;
