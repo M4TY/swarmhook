@@ -1,4 +1,4 @@
-import {config, DiscordNotification, Service} from "../index";
+import { config, DiscordNotification, Service } from "../index";
 
 enum NotificationType {
     "deploy",
@@ -67,4 +67,4 @@ const notify = (message: string, type: NotificationType, service?: Service) => {
     }
 }
 
-export {notify, NotificationType};
+export { NotificationType, notify };
