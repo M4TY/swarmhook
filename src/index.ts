@@ -60,7 +60,7 @@ const main = () => {
         const service = config.webhooks.services[serviceName];
         const token = service.token;
 
-        if (req.headers.authorization !== `Bearer ${token}`) {
+        if (token && req.headers.authorization !== `Bearer ${token}`) {
             res.status(401).send("Unauthorized");
             console.log("-> Unauthorized request for " + req.params.serviceName)
             return;
