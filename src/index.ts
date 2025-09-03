@@ -86,7 +86,7 @@ const main = () => {
 }
 
 function exec(service: Service, version: string) {
-    child_process.exec(`docker login -u ${process.env.DOCKER_USERNAME} -p ${process.env.DOCKER_PASSWORD}`, (error, stdout, stderr) => {
+    child_process.exec(`docker login ${process.env.PRIVATE_REGISTRY_URL ?? ""} -u ${process.env.DOCKER_USERNAME} -p ${process.env.DOCKER_PASSWORD}`, (error, stdout, stderr) => {
         if (error) {
             notify(`Error logging into docker registry`, NotificationType.error);
             console.log(error);

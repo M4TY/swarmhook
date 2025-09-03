@@ -67,6 +67,7 @@ You will also have to create a `.env` file that will contain Docker Hub credenti
 ```text
 DOCKER_USERNAME=<username>
 DOCKER_PASSWORD=<token>
+PRIVATE_REGISTRY_URL=myregistry.com # Optional, only if using a private registry
 ```
 
 After creating all these files you can run `docker stack deploy -c swarmhook.yml swarmhook` and call the webhooks!
