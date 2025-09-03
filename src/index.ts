@@ -1,9 +1,9 @@
 import * as child_process from "child_process";
-import express from "express";
-import {parse} from 'yaml'
-import fs from "fs";
 import dotenv from "dotenv";
-import {notify, NotificationType} from "./utils/notifier";
+import express from "express";
+import fs from "fs";
+import { parse } from 'yaml';
+import { NotificationType, notify } from "./utils/notifier";
 
 type Config = {
     webhooks: {
@@ -34,7 +34,8 @@ const main = () => {
     const port = process.env.PORT || 3000;
     config = loadConfig();
 
-    console.log(config);
+    console.log(`Loaded ${Object.keys(config.webhooks.services).length} service(s)`);
+    console.log(`Using ${Object.keys(config.notifications).length} notification(s) providers`);
 
     for (const service of Object.keys(config.webhooks.services)) {
         notify(service, NotificationType.success);
@@ -52,19 +53,18 @@ const main = () => {
 
         if (!config.webhooks.services[serviceName]) {
             res.status(404).send("Service not found");
+            console.log("-> Service not found: " + req.params.serviceName)
             return;
         }
 
         const service = config.webhooks.services[serviceName];
-
         const token = service.token;
 
-        if (req.headers.authorization !== `Bearer ${token}`) {
+        if (token && req.headers.authorization !== `Bearer ${token}`) {
             res.status(401).send("Unauthorized");
+            console.log("-> Unauthorized request for " + req.params.serviceName)
             return;
         }
-
-        const service_name = service.service_name;
 
         if (service.latest) {
             res.status(200).send("Deploying to latest version");
@@ -73,6 +73,7 @@ const main = () => {
             const imageVersionTag = req.body.versionTag;
             if (!imageVersionTag) {
                 res.status(400).send("Missing version tag for deployment. (If you want to deploy to latest, set latest to true in the config)");
+                console.log("-> Missing tag for " + req.params.serviceName)
                 return;
             }
             res.status(200).send(`Deploying to ${imageVersionTag}`);
@@ -81,7 +82,7 @@ const main = () => {
     });
 
     app.listen(port, () => {
-        console.log(`Server listening for webhooks on ${port}`);
+        console.log(`Server listening for webhooks on port ${port}`);
     });
 }
 
@@ -106,8 +107,7 @@ function exec(service: Service, version: string) {
                 notify(`Successfully deployed ${service_name} to version ${version}`, NotificationType.success, service);
             });
 
-        console.log("Finished request " + service_name)
-
+        console.log("-> Finished request " + service_name)
     });
 }
 

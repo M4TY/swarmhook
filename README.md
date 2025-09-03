@@ -133,6 +133,14 @@ webhooks:
       image: "org/example"
 ```
 
+#### Authentication
+
+You can omit the `token` field in the configuration to allow unauthenticated requests
+without a Bearer token.
+
+**WARNING!** This will allow anyone that knows the name and address of your service
+to redeploy it. Use at your own risk!
+
 #### Notifications
 
 > Disclaimer: The implementation of Notifications is still in an early stage and the config structures may change.
